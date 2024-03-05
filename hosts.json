@@ -1,0 +1,4 @@
+{
+  "pbnwp.loc": "http://localhost:8080",
+  "*.local": "http://localhost:8090"
+}
