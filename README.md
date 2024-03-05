@@ -4,5 +4,6 @@ The reverse proxy server for the local environment that can help to run several 
 ## Roadmap
 - [x] Configure routing via `json`.
 - [x] Implement reverse-proxy functionality.
+- [ ] Add documentation how to use it.
 - [ ] Add supporting url paths.
 - [ ] Add supporting https.
