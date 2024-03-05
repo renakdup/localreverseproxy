@@ -4,6 +4,8 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"net/http/httputil"
+	"net/url"
 	"os"
 	"regexp"
 )
@@ -28,8 +30,17 @@ func main() {
 			}
 		}
 
-		// proxy url
-		fmt.Println(proxyUrl)
+		// reverseProxy url
+		//fmt.Println(proxyUrl)
+
+		parsedProxyUrl, err := url.Parse(proxyUrl)
+		if err != nil {
+			http.Error(w, "Error parsing backend URL", http.StatusInternalServerError)
+			return
+		}
+
+		reverseProxy := httputil.NewSingleHostReverseProxy(parsedProxyUrl)
+		reverseProxy.ServeHTTP(w, r)
 	})
 
 	http.ListenAndServe(":80", proxyHandler)
