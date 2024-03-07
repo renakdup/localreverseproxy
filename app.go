@@ -14,13 +14,13 @@ func main() {
 	proxyHandler := http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		var proxyUrl string
 
-		hosts := getMapped()
+		services := getMapped()
 
-		for domainPattern, pUrl := range hosts {
-			pattern := fmt.Sprintf(`^%s$`, domainPattern)
+		for servicePattern, pUrl := range services {
+			pattern := fmt.Sprintf(`^%s$`, servicePattern)
 			match, err := regexp.MatchString(pattern, r.Host)
 			if err != nil {
-				//TODO:: add logging
+				fmt.Println(err)
 				continue
 			}
 
@@ -30,12 +30,18 @@ func main() {
 			}
 		}
 
-		// reverseProxy url
-		//fmt.Println(proxyUrl)
+		if proxyUrl == "" {
+			http.Error(w, "No match of service was found in services.json", http.StatusInternalServerError)
+			return
+		}
 
 		parsedProxyUrl, err := url.Parse(proxyUrl)
 		if err != nil {
-			http.Error(w, "Error parsing backend URL", http.StatusInternalServerError)
+			http.Error(
+				w,
+				fmt.Sprintf("Error parsing of service URL %s", proxyUrl),
+				http.StatusInternalServerError,
+			)
 			return
 		}
 
@@ -43,11 +49,15 @@ func main() {
 		reverseProxy.ServeHTTP(w, r)
 	})
 
-	http.ListenAndServe(":80", proxyHandler)
+	fmt.Println("Reverse proxy is started.")
+	err := http.ListenAndServe(":80", proxyHandler)
+	if err != nil {
+		panic(err)
+	}
 }
 
 func getMapped() map[string]string {
-	data, err := os.ReadFile("hosts.json") // For read access.
+	data, err := os.ReadFile("services.json") // For read access.
 	if err != nil {
 		panic(err)
 	}

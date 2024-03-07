@@ -5,6 +5,6 @@ The reverse proxy server for the local environment that can help to run several 
 - [x] Configure routing via `json`.
 - [x] Implement reverse-proxy functionality.
 - [ ] Add documentation how to use it.
-- [ ] Show error if port is busy.
+- [x] Show error if port is busy.
 - [ ] Add supporting url paths.
 - [ ] Add supporting https.
