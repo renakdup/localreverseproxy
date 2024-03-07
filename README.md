@@ -1,6 +1,19 @@
 # Local Reverse Proxy
 The reverse proxy server for the local environment that can help to run several docker projects locally via the 80 port.
 
+## How it works (diagram)
+```bash
+      Client              Host (OS mapping)        Reverse Proxy        Target Server (Docker App)
+     +------+              +-------------+       +--------------+         +----------------+
+     |      | example.loc  |             |       │              │  proxy  │                │
+     |      |─────────────►| example.loc │──────►│              │────────►│                │
+     |      |              |             │       │ 127.0.0.1:80 │         │ localhost:8080 │
+     |      |◄─────────────| 127.0.0.1   │◄──────│              │◄────────│                │
+     |      |              |             │       │              │         │                │
+     +------+              +-------------+       +--------------+         +----------------+
+     (Browser)               /etc/hosts
+```
+
 ## How to use it
 1. [Download and Install Go](https://go.dev/dl/)
 2. Clone this repo where you want.
