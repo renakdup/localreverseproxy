@@ -16,11 +16,13 @@ func main() {
 
 		services := getMapped()
 
+		fmt.Println(fmt.Sprintf("Requested `%s` host with method `%s` and URI `%s`", r.Host, r.Method, r.RequestURI))
+
 		for servicePattern, pUrl := range services {
 			pattern := fmt.Sprintf(`^%s$`, servicePattern)
 			match, err := regexp.MatchString(pattern, r.Host)
 			if err != nil {
-				fmt.Println(err)
+				fmt.Println(fmt.Sprintf("RegExp returned error: %s", err))
 				continue
 			}
 
