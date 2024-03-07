@@ -3,15 +3,15 @@ The reverse proxy server for the local environment that can help to run several 
 
 ## How it works (diagram)
 ```text
-      Client              Host (OS mapping)        Reverse Proxy        Target Server (Docker App)
-     +------+              +-------------+       +--------------+         +----------------+
-     |      | example.loc  |             |       │              │  proxy  │                │
-     |      |─────────────►| example.loc │──────►│              │────────►│                │
-     |      |              |             │       │ 127.0.0.1:80 │         │ localhost:8080 │
-     |      |◄─────────────| 127.0.0.1   │◄──────│              │◄────────│                │
-     |      |              |             │       │              │         │                │
-     +------+              +-------------+       +--------------+         +----------------+
-     (Browser)               /etc/hosts
+    Client                Host (OS mapping)        Reverse Proxy        Target Server (Docker App)
+   +------+    request    +---------------+       +--------------+         +----------------+
+   │      │ 'example.loc' │               │       │              │  proxy  │                │
+   │      │──────────────►│ 'example.loc' │──────►│              │────────►│                │
+   │      │    response   │   mapped to   │       │ 127.0.0.1:80 │         │ localhost:8080 │
+   │      │◄──────────────│  '127.0.0.1'  │◄──────│              │◄────────│                │
+   │      │               │               │       │              │         │                │
+   +------+               +---------------+       +--------------+         +----------------+
+   (Browser)                  /etc/hosts
 ```
 
 ## How to use it
