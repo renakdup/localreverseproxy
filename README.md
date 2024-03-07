@@ -2,7 +2,7 @@
 The reverse proxy server for the local environment that can help to run several docker projects locally via the 80 port.
 
 ## How it works (diagram)
-```bash
+```text
       Client              Host (OS mapping)        Reverse Proxy        Target Server (Docker App)
      +------+              +-------------+       +--------------+         +----------------+
      |      | example.loc  |             |       │              │  proxy  │                │
