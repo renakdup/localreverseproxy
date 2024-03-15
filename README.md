@@ -3,6 +3,8 @@ The reverse proxy server for the local environment can help to run several docke
 
 Each time when you face issues when you need to run several docker projects and you don't want to stop and run it again and again, or you just need your projects to work on 80 port. Use this Local Reverse Proxy!
 
+Article: [How to run multiple Docker projects under port 80 using an off-the-shelf local Reverse Proxy](https://wp-yoda.com/en/environment/how-to-run-multiple-docker-projects-under-port-80-using-an-off-the-shelf-local-reverse-proxy/).
+
 ## How it works (diagram)
 ```text
     Client                  Host (OS mapping)          Reverse Proxy        Target Server (Docker App)
