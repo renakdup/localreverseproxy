@@ -32,6 +32,12 @@ func main() {
 			}
 		}
 
+		if proxyUrl == "" && r.Host == "localhost" {
+			w.WriteHeader(http.StatusOK)
+			fmt.Fprintf(w, "Server proxy started successfully!")
+			return
+		}
+
 		if proxyUrl == "" {
 			http.Error(w, "No match of service was found in services.json", http.StatusInternalServerError)
 			return
